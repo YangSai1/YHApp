@@ -38,4 +38,8 @@
                                        action:(SEL)action
                                 clipsToBounds:(BOOL)clipsToBounds;
 
+/**
+ *  快速创建一个登录button
+ */
++ (UIButton *)buttonWithTitle:(NSString *)title;
 @end

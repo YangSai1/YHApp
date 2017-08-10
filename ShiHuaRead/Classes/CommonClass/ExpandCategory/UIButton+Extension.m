@@ -76,5 +76,10 @@
     return button;
 }
 
-
++ (UIButton *)buttonWithTitle:(NSString *)title
+{
+    UIButton *button = [UIButton buttonWithBackgroundColor:Color(@"157efb") title:title titleLabelFont:fontCommon_15 titleColor:white_ffffff target:nil action:nil clipsToBounds:YES];
+    button.viewSize = CGSizeMake(100, 45);
+    return button;
+}
 @end

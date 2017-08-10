@@ -7,9 +7,13 @@
 //
 
 #import "AppDelegate.h"
+
+#import "IQKeyboardManager.h"
+
 #import "SHHTTPConst.h"
 #import "CTServiceFactory.h"
-
+#import "SHLoginViewController.h"
+#import "SHNavigationController.h"
 @interface AppDelegate ()<CTServiceFactoryDataSource>
 
 @end
@@ -20,7 +24,28 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [CTServiceFactory sharedInstance].dataSource = self;
+    
+    
+    IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
+    manager.enable =YES;// 控制整个功能是否启用。
+    manager.shouldResignOnTouchOutside =YES;//控制点击背景是否收起键盘
+    manager.shouldToolbarUsesTextFieldTintColor =YES;//控制键盘上的工具条文字颜色是否用户自定义
+    manager.toolbarDoneBarButtonItemText =@"完成";//将右边Done改成完成
+    manager.enableAutoToolbar =NO;// 控制是否显示键盘上的工具条
+    manager.toolbarManageBehaviour =IQAutoToolbarByTag;
 
+    
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    self.window.backgroundColor = [UIColor whiteColor];
+    
+    SHLoginViewController *loginVc = [[SHLoginViewController alloc] init];
+    SHNavigationController *navVc = [[SHNavigationController alloc] initWithRootViewController:loginVc];
+    
+    self.window.rootViewController = navVc;
+    
+    [self.window makeKeyAndVisible];
+
+    
     return YES;
 }
 

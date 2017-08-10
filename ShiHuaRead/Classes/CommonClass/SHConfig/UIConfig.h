@@ -10,14 +10,25 @@
 #define UIConfig_h
 
 
+//系统版本号判断
+#define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
+#define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
+
+#define IS_IPHONE (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPhone)
+#define SCREEN_MAX_LENGTH (MAX(kScreenWidth, kScreenHeight))
+
+
 #define kBaseWidth 320
 #define kBaseHight 568
 
 ///////////////////////
 //新的UI机制
 
-#define zBaseWidth 720
-#define zBaseHeight 1280
+#define zBaseWidth 750
+#define zBaseHeight 1230
 
 #define zScaleW(valueSize) ((valueSize) * (kScreenWidth/zBaseWidth))
 #define zScaleH(valueSize) ((valueSize) * (kScreenHeight/zBaseHeight))
@@ -26,6 +37,8 @@
 
 //statusBar navBar高度和
 #define kBarH 64
+
+#define cellH 58
 
 #define kScreenWidth ([UIScreen mainScreen].bounds.size.width)
 #define kScreenHeight ([UIScreen mainScreen].bounds.size.height)
@@ -67,7 +80,6 @@
 
 #define FontWithSize(fontSize) [UIFont fontWithName:@"Heiti SC" size:fontSize]
 
-#define cellH 40 * sizeScale
 #define cellHeaderH 10 * sizeScale
 
 
@@ -87,6 +99,19 @@
 #define blue_61ddef [EBUtility UIColorFromHexColor:@"61ddef"]
 #define blue_ze_00a9b1 [EBUtility UIColorFromHexColor:@"00a9b1"]
 
+#define Color_E5E5E5 [EBUtility UIColorFromHexColor:@"e5e5e5"]
+
+
+
+#define TabbarNorColer [EBUtility UIColorFromHexColor:@"333333"]
+
+#define LoginTitleColer [EBUtility UIColorFromHexColor:@"818181"]
+
+
+
+#define TabbarSelectColer RGB(57, 155, 255)
+#define NavTitleColoe RGB(255, 255, 255)
+
 #define Color(colorStr) [EBUtility UIColorFromHexColor:colorStr]
 
 //
@@ -103,5 +128,15 @@
 #define XCFSearchBarTintColor RGB(192, 192, 192)        // 搜索按钮背景色
 #define XCFDishViewBackgroundColor RGB(235, 235, 226)   // 作品view背景色
 #define XCFAddressCellColor RGB(215, 228, 225)          // 收货地址
+
+
+#define TIP_SHOW @"敬请期待"
+
+
+#define DLog(fmt, ...) NSLog((@"[文件名:%s]\n" "[函数名:%s]\n" "[行号:%d] \n" fmt), __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__);
+#define DeBugLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);
+#define NSLog(...) NSLog(__VA_ARGS__);
+#define MyNSLog(FORMAT, ...) fprintf(stderr,"[%s]:[line %d行] %s\n",[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String]);
+
 
 #endif /* UIConfig_h */

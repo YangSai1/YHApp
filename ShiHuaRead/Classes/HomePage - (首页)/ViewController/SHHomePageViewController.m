@@ -7,6 +7,7 @@
 //
 
 #import "SHHomePageViewController.h"
+#import "SHHomeDetailViewController.h"
 
 @interface SHHomePageViewController ()
 
@@ -22,6 +23,12 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
+    SHHomeDetailViewController *vc = [[SHHomeDetailViewController alloc] init];
+    [self.navigationController pushViewController:vc animated:YES];
 }
 
 /*

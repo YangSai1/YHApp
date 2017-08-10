@@ -12,4 +12,6 @@
 
 - (UIImage *)circleImage;
 
+- (UIImage *)scaleImage:(UIImage *)img toSize:(CGSize)size;
+
 @end

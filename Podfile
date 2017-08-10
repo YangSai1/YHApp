@@ -8,7 +8,7 @@ pod 'SDWebImage'
 pod 'SVProgressHUD'
 pod 'MJRefresh'
 pod 'XHLaunchAd'
-
+pod 'IQKeyboardManager'
 end
 
 

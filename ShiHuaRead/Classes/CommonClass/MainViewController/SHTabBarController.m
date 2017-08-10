@@ -8,10 +8,12 @@
 
 #import "SHTabBarController.h"
 #import "SHNavigationController.h"
+
 #import "SHHomePageViewController.h"
 #import "SHPublishViewController.h"
-#import "SHDiscoverViewController.h"
-
+#import "SHICanViewController.h"
+#import "SHChatViewController.h"
+#import "SHUserCenterViewController.h"
 @interface SHTabBarController ()
 
 @end
@@ -21,11 +23,11 @@
 + (void)initialize {
     NSMutableDictionary *normalAttrs = [NSMutableDictionary dictionary];
     normalAttrs[NSFontAttributeName] = [UIFont systemFontOfSize:11];
-    normalAttrs[NSForegroundColorAttributeName] = [UIColor whiteColor];
+    normalAttrs[NSForegroundColorAttributeName] = TabbarNorColer;
     
     NSMutableDictionary *selectedAttrs = [NSMutableDictionary dictionary];
     selectedAttrs[NSFontAttributeName] = normalAttrs[NSFontAttributeName];
-    selectedAttrs[NSForegroundColorAttributeName] = [UIColor redColor];
+    selectedAttrs[NSForegroundColorAttributeName] = TabbarSelectColer;
     
     UITabBarItem *appearance = [UITabBarItem appearance];
     [appearance setTitleTextAttributes:normalAttrs forState:UIControlStateNormal];
@@ -33,18 +35,31 @@
 }
 
 - (void)viewDidLoad {
+    
+    [[UITabBar appearance] setBackgroundImage:[EBUtility PureColorImageFromColor:[UIColor whiteColor] withSize:CGSizeMake(kScreenWidth, 49)]];
         [self setupChildViewController:[[SHHomePageViewController alloc] init]
-                             title:@"市集"
-                             image:@"tabBDeselected"
-                     selectedImage:@"tabBSelected"];
+                             title:@"公告"
+                             image:@"icon-gonggao-48-48"
+                     selectedImage:@"icon-gonggao-48"];
+    [self setupChildViewController:[[SHICanViewController alloc] init]
+                             title:@"我能"
+                             image:@"icon-woneng-48"
+                     selectedImage:@"icon-woneng-48-48"];
+
     [self setupChildViewController:[[SHPublishViewController alloc] init]
-                             title:@"社区"
-                             image:@"tabCDeselected"
-                     selectedImage:@"tabCSelected"];
-    [self setupChildViewController:[[SHDiscoverViewController alloc] init]
-                             title:@"我"
-                             image:@"tabDDeselected"
-                     selectedImage:@"tabDSelected"];
+                             title:@"公示"
+                             image:@"icon-gongshi-46-47-"
+                     selectedImage:@"icon-gongshi-46-47"];
+
+    [self setupChildViewController:[[SHChatViewController alloc] init]
+                             title:@"聊天"
+                             image:@"icon-liaotian-44"
+                     selectedImage:@"icon-liaotian-44-44"];
+    
+    [self setupChildViewController:[[SHUserCenterViewController alloc] init]
+                             title:@"我的"
+                             image:@"icon-wode-44"
+                     selectedImage:@"icon-wode-44-44"];
 }
 
 - (void)setupChildViewController:(UIViewController *)childController
