@@ -39,6 +39,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>VTMagic.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>XHLaunchAd.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -52,17 +57,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>43B36FC816D9B6938875C9EBB3DFB3F8</key>
+		<key>676E6C7FFCD3B84F2CB02CEF219B95FF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4B981BF2D80C82A14235D5E2DA78F237</key>
+		<key>7FC65417AAE98E29589261E5DA335094</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5A3F25838A5BEDEA14B2753EF7E9F557</key>
+		<key>802799AFE59F25CB3E119AA60CC4FD3F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>80354ACD857EAC80208939E1CE3CB170</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -82,7 +92,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CBA0506440778D865FAEDA1CEA841796</key>
+		<key>CA497FE71B17CA1118B5A9C18787E55D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

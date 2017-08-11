@@ -9,6 +9,7 @@
 #import "SHHomePageViewController.h"
 #import "SHHomeDetailViewController.h"
 #import "DOPDropDownMenu.h"
+#import "SHSeachBarView.h"
 
 @interface SHHomePageViewController () <DOPDropDownMenuDataSource,DOPDropDownMenuDelegate>
 
@@ -17,6 +18,9 @@
 @property(nonatomic, strong) NSArray *category;
 
 @property (nonatomic, weak) DOPDropDownMenu *menu;
+
+@property(nonatomic, strong) SHSeachBarView *seachBar;
+
 @end
 
 @implementation SHHomePageViewController
@@ -25,6 +29,7 @@
     [super viewDidLoad];
     [self initData];
     [self initView];
+    [self initNav];
     // Do any additional setup after loading the view.
 }
 
@@ -43,12 +48,39 @@
     
     [self.view addSubview:menu];
     _menu = menu;
+    
+    
+
+}
+
+- (void)initNav
+{
+    _seachBar = [[SHSeachBarView alloc] initWithFrame:CGRectMake(0, 0, 300, 30)];
+    
+    self.navigationItem.titleView = _seachBar;
+    
+    UIBarButtonItem *leftBarItem = [UIBarButtonItem barButtonItemWithTitle:@"汩汩" target:nil action:nil];
+    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
+                                       initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+                                       target:nil action:nil];
+    negativeSpacer.width = -5;
+
+    UIBarButtonItem *rightBarItem = [UIBarButtonItem barButtonRightItemWithImageName:@"icon-shaixuan-38-37" target:self action:@selector(rightBtn)];
+    
+    self.navigationItem.leftBarButtonItems = @[leftBarItem];
+    
+    self.navigationItem.rightBarButtonItems = @[negativeSpacer,rightBarItem];
 
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)rightBtn
+{
+    
 }
 
 

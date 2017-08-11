@@ -802,7 +802,6 @@
     
     if (_isS) {
         [self animateTitle:title show:YES complete:^{
-            
             [self animateIndicator:indicator title:title Forward:forward complete:^{
                 [self animateBackGroundView:background show:forward complete:^{
                     [self animateTableView:tableView show:forward complete:^{

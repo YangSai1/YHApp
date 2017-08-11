@@ -9,6 +9,7 @@ pod 'SVProgressHUD'
 pod 'MJRefresh'
 pod 'XHLaunchAd'
 pod 'IQKeyboardManager'
+pod 'VTMagic'
 end
 
 

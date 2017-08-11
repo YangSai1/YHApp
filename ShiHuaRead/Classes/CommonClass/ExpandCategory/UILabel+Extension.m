@@ -14,11 +14,13 @@
                  textColor:(UIColor *)textColor
              numberOfLines:(NSInteger)lines
              textAlignment:(NSTextAlignment)textAlignment {
+    
     UILabel *label = [[UILabel alloc] init];
     label.font = font;
     label.textColor = textColor;
-    label.numberOfLines = lines;
+    label.numberOfLines = lines;    
     label.textAlignment = textAlignment;
+
     return label;
 }
 

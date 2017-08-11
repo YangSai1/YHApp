@@ -6,8 +6,7 @@
 //  Copyright © 2017年 Mac. All rights reserved.
 //
 
-#import "SHBaseViewController.h"
-
-@interface SHMineNoticeViewController : SHBaseViewController
+#import "VTMagic.h"
+@interface SHMineNoticeViewController : VTMagicController
 
 @end

@@ -32,7 +32,7 @@
         }];
         
         [titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.equalTo(imageView.mas_bottom);
+            make.top.equalTo(imageView.mas_bottom).offset(2);
             make.centerX.equalTo(weakSelf);
         }];
 

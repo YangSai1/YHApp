@@ -18,6 +18,9 @@
 #import "ILSettingGroup.h"
 
 #import "SHMineNoticeViewController.h"
+#import "SHMineICanViewController.h"
+
+
 #import "SHMineTopViewLbView.h"
 
 @interface SHUserCenterViewController () <UITableViewDelegate,UITableViewDataSource>
@@ -216,7 +219,7 @@
 - (void)addGroup0
 {
     ILSettingItem *mineNotice = [ILSettingArrowItem itemWithIcon:@"icon-wodepingu-35" title:@"我的公告" destVcClass:[SHMineNoticeViewController class]];
-    ILSettingItem *mineCan = [ILSettingArrowItem itemWithIcon:@"icon-wodewoneng-40" title:@"我的我能" destVcClass:[SHBaseViewController class]];
+    ILSettingItem *mineCan = [ILSettingArrowItem itemWithIcon:@"icon-wodewoneng-40" title:@"我的我能" destVcClass:[SHMineICanViewController class]];
     mineCan.isShowDivider = NO;
 
     ILSettingGroup *group0 = [[ILSettingGroup alloc] init];

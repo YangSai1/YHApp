@@ -101,7 +101,9 @@
 
 #define Color_E5E5E5 [EBUtility UIColorFromHexColor:@"e5e5e5"]
 
+#define Color_252525 [EBUtility UIColorFromHexColor:@"252525"]
 
+#define Color_c1c1c1 [EBUtility UIColorFromHexColor:@"c1c1c1"]
 
 #define TabbarNorColer [EBUtility UIColorFromHexColor:@"333333"]
 

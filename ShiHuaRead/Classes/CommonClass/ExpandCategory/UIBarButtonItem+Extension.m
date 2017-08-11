@@ -49,10 +49,10 @@
 + (instancetype)barButtonItemWithTitle:(NSString *)title
                                 target:(id)target
                                 action:(SEL)action {
-    UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 50, 40)];
-    button.titleLabel.textAlignment = NSTextAlignmentRight;
-    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    button.titleLabel.font = [UIFont systemFontOfSize:16];
+    UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 40, 30)];
+    button.titleLabel.textAlignment = NSTextAlignmentLeft;
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    button.titleLabel.font = [UIFont systemFontOfSize:17];
     [button setTitle:title forState:UIControlStateNormal];
     [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]initWithCustomView:button];

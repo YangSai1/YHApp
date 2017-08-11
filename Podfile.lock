@@ -21,6 +21,9 @@ PODS:
     - SDWebImage/Core (= 4.0.0)
   - SDWebImage/Core (4.0.0)
   - SVProgressHUD (2.1.2)
+  - VTMagic (1.2.4):
+    - VTMagic/Core (= 1.2.4)
+  - VTMagic/Core (1.2.4)
   - XHLaunchAd (3.4.2)
 
 DEPENDENCIES:
@@ -30,6 +33,7 @@ DEPENDENCIES:
   - MJRefresh
   - SDWebImage
   - SVProgressHUD
+  - VTMagic
   - XHLaunchAd
 
 SPEC CHECKSUMS:
@@ -39,8 +43,9 @@ SPEC CHECKSUMS:
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SVProgressHUD: c404a55d78acbeb7ebb78b76d3faf986475a6994
+  VTMagic: b49e5f456dbcbfd9a3588ba92417233a105bc193
   XHLaunchAd: 2c5d5f8ce10ed7f923820ae0d7bb577c6e59064f
 
-PODFILE CHECKSUM: 1c3237e0942647f501edbffe7ae333a3b48aa643
+PODFILE CHECKSUM: 05657f4ea7505da33ccfd35e2d20bcf8139a4460
 
 COCOAPODS: 1.2.0
