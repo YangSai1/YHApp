@@ -7,11 +7,13 @@
 //
 
 #import "SHHomePageViewController.h"
+#import "HomeTableViewCell.h"
 #import "SHHomeDetailViewController.h"
 #import "DOPDropDownMenu.h"
 #import "SHSeachBarView.h"
+@interface SHHomePageViewController ()<UITableViewDelegate,UITableViewDataSource,DOPDropDownMenuDataSource,DOPDropDownMenuDelegate>
 
-@interface SHHomePageViewController () <DOPDropDownMenuDataSource,DOPDropDownMenuDelegate>
+@property(nonatomic,strong)UITableView * HomeTableView;
 
 @property (nonatomic, strong) NSArray *sorts;
 
@@ -29,10 +31,47 @@
     [super viewDidLoad];
     [self initData];
     [self initView];
+    self.automaticallyAdjustsScrollViewInsets = NO;
+    [self setUpHomeTable];
     [self initNav];
-    // Do any additional setup after loading the view.
 }
-
+-(void)setUpHomeTable{
+    UITableView * homeTable = [[UITableView alloc]init];
+    homeTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+    homeTable.dataSource = self;
+    homeTable.delegate = self;
+    homeTable.frame = CGRectMake(0, 108, kScreenWidth, kScreenHeight - 159);
+    self.HomeTableView = homeTable;
+    [self.view addSubview:homeTable];
+}
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 8;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 104;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    HomeTableViewCell * HomeCell = [tableView dequeueReusableCellWithIdentifier:@"HomeCell"];
+    if (HomeCell == nil) {
+        HomeCell = [HomeTableViewCell HomeTableCell];
+    }
+    HomeCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    
+    
+    
+    return HomeCell;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    SHHomeDetailViewController * DeTailVC = [[SHHomeDetailViewController alloc]init];
+    
+    
+    [self.navigationController pushViewController:DeTailVC animated:YES];
+}
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    
+}
 - (void)initData
 {
     _sorts = @[@"默认排序",@"离我最近",@"好评优先",@"人气优先",@"最新发布"];
@@ -49,41 +88,7 @@
     [self.view addSubview:menu];
     _menu = menu;
     
-    
-
 }
-
-- (void)initNav
-{
-    _seachBar = [[SHSeachBarView alloc] initWithFrame:CGRectMake(0, 0, 300, 30)];
-    
-    self.navigationItem.titleView = _seachBar;
-    
-    UIBarButtonItem *leftBarItem = [UIBarButtonItem barButtonItemWithTitle:@"汩汩" target:nil action:nil];
-    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
-                                       initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
-                                       target:nil action:nil];
-    negativeSpacer.width = -5;
-
-    UIBarButtonItem *rightBarItem = [UIBarButtonItem barButtonRightItemWithImageName:@"icon-shaixuan-38-37" target:self action:@selector(rightBtn)];
-    
-    self.navigationItem.leftBarButtonItems = @[leftBarItem];
-    
-    self.navigationItem.rightBarButtonItems = @[negativeSpacer,rightBarItem];
-
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)rightBtn
-{
-    
-}
-
-
 - (NSInteger)numberOfColumnsInMenu:(DOPDropDownMenu *)menu
 {
     return 2;
@@ -113,7 +118,7 @@
 
 - (NSInteger)menu:(DOPDropDownMenu *)menu numberOfItemsInRow:(NSInteger)row column:(NSInteger)column
 {
-        return 0;
+    return 0;
 }
 
 /**
@@ -122,7 +127,7 @@
 - (NSString *)menu:(DOPDropDownMenu *)menu imageNumberOfRowsInColumn:(NSInteger)column
 {
     return @"icon-wode-44";
-
+    
 }
 
 /**
@@ -135,7 +140,7 @@
     }else{
         return @"icon-paixu-33";
     }
-
+    
 }
 
 - (void)menu:(DOPDropDownMenu *)menu didSelectRowAtIndexPath:(DOPIndexPath *)indexPath
@@ -145,20 +150,25 @@
 }
 
 
-//- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
-//{
-//    SHHomeDetailViewController *vc = [[SHHomeDetailViewController alloc] init];
-//    [self.navigationController pushViewController:vc animated:YES];
-//}
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)initNav
+{
+    _seachBar = [[SHSeachBarView alloc] initWithFrame:CGRectMake(0, 0, 300, 30)];
+    
+    self.navigationItem.titleView = _seachBar;
+    
+    UIBarButtonItem *leftBarItem = [UIBarButtonItem barButtonItemWithTitle:@"汩汩" target:nil action:nil];
+    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc]
+                                       initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace
+                                       target:nil action:nil];
+    negativeSpacer.width = -5;
+    
+    UIBarButtonItem *rightBarItem = [UIBarButtonItem barButtonRightItemWithImageName:@"icon-shaixuan-38-37" target:self action:@selector(rightBtn)];
+    
+    self.navigationItem.leftBarButtonItems = @[leftBarItem];
+    
+    self.navigationItem.rightBarButtonItems = @[negativeSpacer,rightBarItem];
+    
 }
-*/
+
 
 @end

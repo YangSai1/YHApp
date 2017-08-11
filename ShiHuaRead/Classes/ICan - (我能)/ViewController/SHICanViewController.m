@@ -7,10 +7,11 @@
 //
 
 #import "SHICanViewController.h"
+#import "WoNengTableViewCell.h"
+#import "SHWoNengXiangqingController.h"
 #import "DOPDropDownMenu.h"
-
-@interface SHICanViewController ()<DOPDropDownMenuDataSource,DOPDropDownMenuDelegate>
-
+@interface SHICanViewController ()<UITableViewDelegate,UITableViewDataSource,DOPDropDownMenuDataSource,DOPDropDownMenuDelegate>
+@property(nonatomic,strong)UITableView * HomeTableView;
 @property (nonatomic, strong) NSArray *sorts;
 
 @property(nonatomic, strong) NSArray *category;
@@ -18,18 +19,45 @@
 @property(nonatomic, strong) NSArray *quyus;
 
 @property (nonatomic, weak) DOPDropDownMenu *menu;
-
 @end
 
 @implementation SHICanViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.automaticallyAdjustsScrollViewInsets = NO;
     [self initData];
     [self initView];
-    // Do any additional setup after loading the view.
+    [self setUpHomeTable];
 }
-
+-(void)setUpHomeTable{
+    UITableView * homeTable = [[UITableView alloc]init];
+    homeTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+    homeTable.dataSource = self;
+    homeTable.delegate = self;
+    homeTable.frame = CGRectMake(0, 108, kScreenWidth, kScreenHeight - 159);
+    self.HomeTableView = homeTable;
+    [self.view addSubview:homeTable];
+}
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return 8;
+}
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+    return 137;
+}
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    WoNengTableViewCell * wonengCell = [tableView dequeueReusableCellWithIdentifier:@"woneng"];
+    if (wonengCell == nil) {
+        wonengCell = [WoNengTableViewCell WoNengTableViewCell];
+    }
+    wonengCell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    return wonengCell;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    SHWoNengXiangqingController * xiangqingVC = [[SHWoNengXiangqingController alloc]init];
+    [self.navigationController pushViewController:xiangqingVC animated:YES];
+}
 - (void)initData
 {
     _sorts = @[@"默认排序",@"离我最近",@"好评优先",@"人气优先",@"最新发布"];
@@ -49,13 +77,6 @@
     _menu = menu;
     
 }
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-
 - (NSInteger)numberOfColumnsInMenu:(DOPDropDownMenu *)menu
 {
     return 3;
@@ -119,16 +140,4 @@
     NSLog(@"点击了 %ld - %ld 项目",indexPath.column,indexPath.row);
     
 }
-
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
-
 @end
