@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "SHAdvertisementReceiveData.h"
 @interface HomeTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *HomeImageView;
 @property (weak, nonatomic) IBOutlet UILabel *HomeCellTitlelable;
@@ -21,4 +21,6 @@
 
 
 +(instancetype)HomeTableCell;
+- (void)config:(AdvertisementList *)model;
+
 @end

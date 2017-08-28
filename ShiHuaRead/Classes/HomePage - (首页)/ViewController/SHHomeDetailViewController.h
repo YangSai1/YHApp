@@ -8,6 +8,10 @@
 
 #import "SHBaseViewController.h"
 
+#import "SHAdvertisementReceiveData.h"
+
 @interface SHHomeDetailViewController : SHBaseViewController
+
+@property(nonatomic, strong) AdvertisementList *model;
 
 @end

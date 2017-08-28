@@ -10,6 +10,9 @@ pod 'MJRefresh'
 pod 'XHLaunchAd'
 pod 'IQKeyboardManager'
 pod 'VTMagic'
+pod 'MJExtension'
+pod 'TZImagePickerController'
+pod 'FMDB’,’2.5’
 end
 
 

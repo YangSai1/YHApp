@@ -25,6 +25,7 @@
     // Override point for customization after application launch.
     [CTServiceFactory sharedInstance].dataSource = self;
     
+    [SVProgressHUD setMaximumDismissTimeInterval:2];
     
     IQKeyboardManager *manager = [IQKeyboardManager sharedManager];
     manager.enable =YES;// 控制整个功能是否启用。
@@ -51,7 +52,7 @@
 
 #pragma mark - CTServiceFactoryDataSource
 - (NSDictionary<NSString *,NSString *> *)servicesKindsOfServiceFactory {
-    return @{kSHMainService: @"kSHMainService"};
+    return @{kSHMainService: @"SHMainServes"};
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

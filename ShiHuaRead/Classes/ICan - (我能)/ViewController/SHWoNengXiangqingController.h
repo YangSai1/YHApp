@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SHICanListReceiveData.h"
 
 @interface SHWoNengXiangqingController : UIViewController
+
 
 @end

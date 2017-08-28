@@ -6,8 +6,8 @@
 //  Copyright © 2017年 海波的电脑. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "SHBaseViewController.h"
 
-@interface SHTouDanShenSingViewController : UIViewController
+@interface SHTouDanShenSingViewController : SHBaseViewController
 
 @end

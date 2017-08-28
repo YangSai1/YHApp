@@ -20,6 +20,13 @@
 
 #import "XHToast.h"
 #import "UIWindow+Extension.h"
+#import "SHHTTPConst.h"
+#import "SHUserManager.h"
+#import "SVProgressHUD.h"
+#import "MJExtension.h"
+#import "MJRefresh.h"
+
+#import "UIImageView+Extension.h"
 
 //#import "ConfigData.h"
 #endif /* SH_PrefixHeader_pch */

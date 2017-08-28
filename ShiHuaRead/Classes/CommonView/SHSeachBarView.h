@@ -10,8 +10,13 @@
 
 typedef void(^SeachBlock)(NSString *title);
 
+typedef void(^SeachBtnBlock)();
 @interface SHSeachBarView : UIView
 
+@property(nonatomic, strong) UITextField *seachTextField;
+
 - (void)registBlock:(SeachBlock)block;
+
+- (void)registBtnBlock:(SeachBtnBlock)block;
 
 @end

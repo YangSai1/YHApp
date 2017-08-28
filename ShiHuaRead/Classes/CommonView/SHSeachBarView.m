@@ -14,9 +14,12 @@
 
 @property(nonatomic, strong) UIImageView *searchImgView;
 
-@property(nonatomic, strong) UITextField *seachTextField;
+@property(nonatomic, strong) UIButton *searchBtn;
+
 
 @property(nonatomic, copy) SeachBlock block;
+
+@property(nonatomic, copy) SeachBtnBlock btnBlock;
 
 @end
 
@@ -60,8 +63,6 @@
     [_searchView addSubview:_seachTextField];
     
     
-//    _searchBtn = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, kBaseWidth*5/8, _height)];
-//    [_searchView addSubview:_searchBtn];
 }
 
 - (void)registBlock:(SeachBlock)block
@@ -77,4 +78,16 @@
     }
 }
 
+- (void)registBtnBlock:(SeachBtnBlock)block
+{
+    _btnBlock = block;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    if (_btnBlock) {
+        _btnBlock();
+    }
+
+}
 @end

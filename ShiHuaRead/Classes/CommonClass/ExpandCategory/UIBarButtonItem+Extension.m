@@ -63,9 +63,9 @@
                          selectedTitle:(NSString *)selTitle
                                 target:(id)target
                                 action:(SEL)action {
-    UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 60, 40)];
-    [button setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    button.titleLabel.font = [UIFont systemFontOfSize:16];
+    UIButton *button = [[UIButton alloc]initWithFrame:CGRectMake(0, 0, 70, 40)];
+    [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    button.titleLabel.font = font_14;
     [button setTitle:title forState:UIControlStateNormal];
     [button setTitle:selTitle forState:UIControlStateSelected];
     [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
@@ -81,5 +81,64 @@
 //    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithCustomView:icon];
     return nil;
 }
+
++ (NSArray *)itemsWithName:(NSString *)Name font:(CGFloat)font target:target action:(SEL)action {
+    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    negativeSpacer.width = -5;
+    
+    UIButton *btn = [[UIButton alloc] init];
+    btn.titleLabel.font = [UIFont systemFontOfSize:font];
+    [btn setTitle:Name forState:UIControlStateNormal];
+    [btn sizeToFit];
+    //监听按钮的点击
+    [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    btn.adjustsImageWhenHighlighted = NO;
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithCustomView:btn];
+    return @[negativeSpacer, item];
+}
+
++ (NSArray *)itemsWithImageName:(NSString *)imageName highImageName:(NSString *)highImageName target:target action:(SEL)action {
+    UIBarButtonItem *negativeSpacer = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    negativeSpacer.width = -5;
+    
+    UIBarButtonItem *item = [UIBarButtonItem itemWithImageName:imageName highImageName:highImageName target:target action:action];
+    return @[negativeSpacer, item];
+}
+
+/**
+ *  没有图片调整的按钮
+ */
++ (UIBarButtonItem *)itemWithImageName:(NSString *)imageName highImageName:(NSString *)highImageName target:target action:(SEL)action {
+    UIButton *button = [[UIButton alloc] init];
+    //    button.backgroundColor = [UIColor redColor];
+    // 设置按钮的背景图片
+    [button setBackgroundImage:[UIImage imageNamed:imageName] forState:UIControlStateNormal];
+    if (highImageName != nil) {
+        [button setBackgroundImage: [UIImage imageNamed:highImageName] forState:UIControlStateHighlighted];
+    }
+    // 设置按钮的尺寸为背景图片的尺寸
+    button.viewSize = button.currentBackgroundImage.size;
+    button.adjustsImageWhenHighlighted = NO;
+    //监听按钮的点击
+    [button addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    
+    return [[UIBarButtonItem alloc] initWithCustomView:button];
+}
+
+/**
+ *  没有文字调整的按钮
+ */
++ (UIBarButtonItem *)itemWithName:(NSString *)Name font:(CGFloat)font target:target action:(SEL)action {
+    
+    UIButton *btn = [[UIButton alloc] init];
+    btn.titleLabel.font = [UIFont systemFontOfSize:font];
+    [btn setTitle:Name forState:UIControlStateNormal];
+    [btn sizeToFit];
+    //监听按钮的点击
+    [btn addTarget:target action:action forControlEvents:UIControlEventTouchUpInside];
+    btn.adjustsImageWhenHighlighted = NO;
+    return [[UIBarButtonItem alloc] initWithCustomView:btn];
+}
+
 
 @end

@@ -20,6 +20,9 @@ typedef void(^TipViewBlock)(SHEditListView *view,NSString *title);
 
 - (void)registBlock:(TipViewBlock)block;
 
+// 是否显示列表View;
+@property(nonatomic, assign) BOOL isShowListView;
+
 @property(nonatomic, strong) UILabel *detailLb;
 
 @property(nonatomic, strong) NSArray *dataArr;

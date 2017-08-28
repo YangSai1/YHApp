@@ -36,6 +36,7 @@
 
 - (void)viewDidLoad {
     
+    [super viewDidLoad];
     [[UITabBar appearance] setBackgroundImage:[EBUtility PureColorImageFromColor:[UIColor whiteColor] withSize:CGSizeMake(kScreenWidth, 49)]];
         [self setupChildViewController:[[SHHomePageViewController alloc] init]
                              title:@"公告"

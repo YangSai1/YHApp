@@ -53,9 +53,8 @@
     UIImageView *rightView = [[UIImageView alloc] init];
     rightView.image = [UIImage imageNamed:@"icon-32-20"];
     _rightImage = rightView;
+    
     [self addSubview:bgView];
-    
-    
     [bgView addSubview:_titleLb];
     [bgView addSubview:_xingV];
     [bgView addSubview:_detailText];
@@ -81,13 +80,25 @@
 
 - (void)setTitle:(NSString *)title detailTitle:(NSString *)detail showXing:(BOOL)isShow
 {
+    [self setTitle:title detailTitle:detail showXing:isShow placehoder:nil];
+}
+
+- (void)setTitle:(NSString *)title detailTitle:(NSString *)detail showXing:(BOOL)isShow placehoder:(NSString *)placeh
+{
     _titleLb.text = title;
     _detailText.text = detail;
+    
+    if (placeh) {
+        _detailText.placeholder = placeh;
+    }
+    
     if (!isShow) {
         _xingV.hidden = YES;
     }
+    _rightImage.hidden = YES;
     
     [self updateConstraintsIfNeeded];
+
 }
 
 - (void)updateConstraints
@@ -95,9 +106,9 @@
     __weak typeof(self) weakSelf = self;
     [_bgView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.bottom.equalTo(weakSelf);
-        make.left.equalTo(weakSelf).offset(15);
-        make.right.equalTo(weakSelf).offset(-15);
-        make.height.equalTo(@(44));
+        make.left.equalTo(weakSelf).offset(zScaleW(13));
+        make.right.equalTo(weakSelf).offset(zScaleW(-13));
+        make.height.equalTo(@(zScaleH(44)));
     }];
     
     [_titleLb mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -112,9 +123,9 @@
     }];
     
     [_detailText mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(weakSelf.xingV.mas_right).offset(40);
+        make.left.equalTo(weakSelf.bgView).offset(120);
         make.centerY.equalTo(weakSelf.bgView);
-        make.width.equalTo(@(200));
+        make.width.equalTo(@(zScaleW(200)));
 //        make.right.equalTo(weakSelf.bgView).offset(-30);
         make.height.equalTo(weakSelf.bgView);
     }];

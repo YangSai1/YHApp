@@ -17,6 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.view.backgroundColor = gray_f3f3f3;
+    self.navigationController.navigationBar.translucent = NO;
+
     // Do any additional setup after loading the view.
 }
 

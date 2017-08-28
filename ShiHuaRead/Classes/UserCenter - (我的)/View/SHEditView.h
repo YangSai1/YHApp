@@ -18,6 +18,8 @@ typedef void(^TextViewBlock)(NSString *title);
 
 - (void)setTitle:(NSString *)title detailTitle:(NSString *)detail showXing:(BOOL)isShow;
 
+- (void)setTitle:(NSString *)title detailTitle:(NSString *)detail showXing:(BOOL)isShow placehoder:(NSString *)placeh;
+
 - (void)registBlock:(TextViewBlock)block;
 
 @end

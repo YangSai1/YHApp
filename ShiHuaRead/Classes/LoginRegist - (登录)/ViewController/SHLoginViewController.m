@@ -7,12 +7,19 @@
 //
 
 #import "SHLoginViewController.h"
-#import "SHTextFieldLineView.h"
-#import "SHThirdLoginView.h"
+#import "SHForgetPasswordViewController.h"
 #import "SHRegistViewController.h"
 #import "SHTabBarController.h"
 
-@interface SHLoginViewController ()
+#import "SHTextFieldLineView.h"
+#import "SHThirdLoginView.h"
+
+#import "SHLoginApiManager.h"
+#import "SHBaseDataReformer.h"
+#import "SHLoginReceiveModel.h"
+#import "SHLoginAskData.h"
+
+@interface SHLoginViewController ()<CTAPIManagerParamSource, CTAPIManagerCallBackDelegate>
 
 @property(nonatomic, strong) UIImageView *logoView;
 
@@ -22,13 +29,21 @@
 
 @property(nonatomic, strong) SHThirdLoginView *thirdLoginView;
 
+@property(nonatomic, strong) SHLoginApiManager *loginApiManager;
+
+@property(nonatomic, strong) SHBaseDataReformer *dataReformer;
+
+@property(nonatomic, strong) SHLoginAskData *loginAskData;
+
 @end
 
 @implementation SHLoginViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    _loginAskData = [[SHLoginAskData alloc] init];
     [self initView];
+    
     
     // Do any additional setup after loading the view.
 }
@@ -37,24 +52,28 @@
 - (void)initView
 {
     _logoView = [[UIImageView alloc] init];
-    _logoView.image = [UIImage imageNamed:@"icon-tupian-183-221"];
+    _logoView.image = [UIImage imageNamed:@"icon-60@2x"];
     _logoView.backgroundColor = [UIColor redColor];
     _logoLb = [UILabel labelWithFont:fontCommon_18 textColor:Color(@"434344") numberOfLines:1 textAlignment:NSTextAlignmentCenter];
     _logoLb.text = @"汩汩";
     _middleView = [[UIView alloc] init];
-    SHTextFieldLineView *userNameView = [[SHTextFieldLineView alloc] initWithImage:@"icon-shouji-51" placeholder:@"请输入手机号" valueAction:^(NSString *value) {
+    
+    __weak typeof(self) weakSelf = self;
+
+    SHTextFieldLineView *userNameView = [[SHTextFieldLineView alloc] initWithImage:@"icon-shouji-51" placeholder:@"请输入用户名" valueAction:^(NSString *value) {
         NSLog(@"%@",value);
+        weakSelf.loginAskData.username = value;
+        
     }];
     
     SHTextFieldLineView *passWordView = [[SHTextFieldLineView alloc] initWithImage:@"icon-denglumima-39" placeholder:@"请输入登陆密码" valueAction:^(NSString *value) {
-        
+        weakSelf.loginAskData.password = value;
     }];
 
     UIButton *loginBtn = [UIButton buttonWithTitle:@"立即登录"];
     [loginBtn addActionBlock:^(UIButton *sender) {
-        
-        SHTabBarController *tabbarVc = [[SHTabBarController alloc] init];
-        [UIWindow currentWindow].rootViewController = tabbarVc;
+
+        [self.loginApiManager loadData];
         
     }];
     
@@ -92,7 +111,6 @@
     [registView addSubview:wangJiBtn];
 
     [self.view addSubview:_thirdLoginView];
-    __weak typeof(self) weakSelf = self;
 
     [_logoView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.centerX.equalTo(weakSelf.view);
@@ -169,12 +187,99 @@
 
 - (void)wangjiBtn
 {
-    
+    SHForgetPasswordViewController *forgetPasswordVc = [[SHForgetPasswordViewController alloc] init];
+    [self.navigationController pushViewController:forgetPasswordVc animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - CTAPIManagerParamSource
+- (NSDictionary *)paramsForApi:(CTAPIBaseManager *)manager
+{
+    NSDictionary *params = @{@"username":@"123456",@"password":@"1234"};
+    
+    [SVProgressHUD showWithStatus:@"加载中..."];
+    
+    if (manager == self.loginApiManager) {
+        //        params = @{
+        //                   kTestAPIManagerParamsKeyLatitude:@(31.228000),
+        //                   kTestAPIManagerParamsKeyLongitude:@(121.454290)
+        //                   };
+        
+//        params = [_loginAskData mj_JSONObject];
+    }
+    
+    return params;
+}
+
+#pragma mark - CTAPIManagerCallBackDelegate
+- (void)managerCallAPIDidSuccess:(CTAPIBaseManager *)manager
+{
+    if (manager == self.loginApiManager) {
+        
+        [SVProgressHUD dismiss];
+        
+        NSDictionary *receiveData = [manager fetchDataWithReformer:nil];
+        
+        NSDictionary *realData = receiveData[@"data"];
+    
+        NSString *errMessage = receiveData[@"msg"];
+        
+        if ([receiveData[@"errcode"]integerValue] == 0) {
+            
+            SHLoginReceiveModel *loginReceiveData = [SHLoginReceiveModel mj_objectWithKeyValues:realData];
+            
+            [SHUserManager shareManager].userModel = loginReceiveData;
+            
+            //        self.resultLable.text = @"success";
+            SHTabBarController *tabbarVc = [[SHTabBarController alloc] init];
+            [UIWindow currentWindow].rootViewController = tabbarVc;
+
+        }else{
+            
+            [SVProgressHUD showErrorWithStatus:errMessage];
+            
+        }
+        
+        
+        NSLog(@"%@", [manager fetchDataWithReformer:nil]);
+        //        [self layoutResultLable];
+    }
+}
+
+- (void)managerCallAPIDidFailed:(CTAPIBaseManager *)manager
+{
+    
+    if (manager == self.loginApiManager) {
+        //        self.resultLable.text = @"fail";
+        [SVProgressHUD showErrorWithStatus:@"网络错误"];
+        [SVProgressHUD dismiss];
+
+        //        [self layoutResultLable];
+    }
+}
+
+#pragma mark - getters and setters
+- (SHLoginApiManager *)loginApiManager
+{
+    if (_loginApiManager == nil) {
+        _loginApiManager = [[SHLoginApiManager alloc] init];
+        _loginApiManager.delegate = self;
+        _loginApiManager.paramSource = self;
+    }
+    return _loginApiManager;
+}
+
+- (SHBaseDataReformer *)dataReformer
+{
+    if (_dataReformer == nil) {
+        _dataReformer = [[SHBaseDataReformer alloc] init];
+    }
+    return _dataReformer;
+
 }
 
 /*

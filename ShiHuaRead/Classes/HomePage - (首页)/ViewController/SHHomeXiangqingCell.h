@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "SHAdvertisementReceiveData.h"
 @interface SHHomeXiangqingCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *xiangqingImage;
 @property (weak, nonatomic) IBOutlet UILabel *xiangqingName;
@@ -27,6 +27,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *xiangqingshuxingThree;
 @property (weak, nonatomic) IBOutlet UILabel *xiangqingshuxingfore;
 
-
+- (void)config:(AdvertisementList *)model;
 +(instancetype)SHHomeXiangqingCell;
 @end

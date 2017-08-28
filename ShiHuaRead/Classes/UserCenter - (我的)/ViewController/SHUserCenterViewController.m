@@ -19,6 +19,16 @@
 
 #import "SHMineNoticeViewController.h"
 #import "SHMineICanViewController.h"
+#import "SHSettingViewController.h"
+#import "SHMineZhongDanViewController.h"
+#import "SHMineTouDanViewController.h"
+#import "SHMessageViewController.h"
+#import "SHMineCollectViewController.h"
+#import "SHMinePointsViewController.h"
+#import "SHTouDanMoneyViewController.h"
+#import "SHTouDanMoneyPasswordViewController.h"
+#import "SHIntellectualViewController.h"
+#import "SHAdviceViewController.h"
 
 
 #import "SHMineTopViewLbView.h"
@@ -63,11 +73,6 @@
     [self.view addSubview:self.tableview];
     self.navigationController.navigationBar.hidden = YES;
     [self creatTableViewTopView];
-    
-//    [_tableview mas_makeConstraints:^(MASConstraintMaker *make) {
-//        make.edges.equalTo(self.view).insets(UIEdgeInsetsMake(200, 0, 0, 0));
-//    }];
-
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -78,17 +83,32 @@
 
 - (void)creatTableViewTopView
 {
+    __weak typeof(self) weakSelf = self;
+
     UIImageView *bgTopView = [[UIImageView alloc] init];
+    bgTopView.userInteractionEnabled = YES;
     bgTopView.frame = CGRectMake(0, 0, kScreenWidth, 230);
     bgTopView.image = [UIImage imageNamed:@"图层-21"];
     bgTopView.backgroundColor = [UIColor whiteColor];
     
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]   initWithTarget:self action:@selector(tap:)];
+    tap.numberOfTapsRequired = 1;
+    [bgTopView addGestureRecognizer:tap];
+
+    
     UIButton *settingBtn = [[UIButton alloc] init];
     [settingBtn setImage:[UIImage imageNamed:@"icon-shezhi-39"] forState:UIControlStateNormal];
-    
+    [settingBtn addActionBlock:^(UIButton *sender) {
+        SHSettingViewController *setVc = [[SHSettingViewController alloc] init];
+        [weakSelf.navigationController pushViewController:setVc animated:YES];
+    }];
     UIButton *xiaoxiBtn = [[UIButton alloc] init];
     [xiaoxiBtn setImage:[UIImage imageNamed:@"icon-xiaoxi-37"] forState:UIControlStateNormal];
-    
+    [xiaoxiBtn addActionBlock:^(UIButton *sender) {
+        SHMessageViewController *messageVc = [[SHMessageViewController alloc] init];
+        [weakSelf.navigationController pushViewController:messageVc animated:YES];
+
+    }];
     UIView *navBgView = [[UIView alloc] init];
     navBgView.backgroundColor = [UIColor clearColor];
     
@@ -131,8 +151,6 @@
         make.height.equalTo(@(64));
     }];
     
-    __weak typeof(self) weakSelf = self;
-
     [settingBtn mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(xiaoxiBtn.mas_left).offset(-10);
         make.centerY.equalTo(xiaoxiBtn);
@@ -249,12 +267,12 @@
 //        
 //        
 //    };
-    ILSettingItem *mineSingle = [ILSettingArrowItem itemWithIcon:@"icon-wodetoudan-40" title:@"我的投单" destVcClass:[SHBaseViewController class]];
+    ILSettingItem *mineSingle = [ILSettingArrowItem itemWithIcon:@"icon-wodetoudan-40" title:@"我的投单" destVcClass:[SHMineTouDanViewController class]];
     
-    ILSettingItem *mineZD = [ILSettingArrowItem itemWithIcon:@"icon-wodezhongdan-40" title:@"我的中单" destVcClass:[SHBaseViewController class]];
+    ILSettingItem *mineZD = [ILSettingArrowItem itemWithIcon:@"icon-wodezhongdan-40" title:@"我的中单" destVcClass:[SHMineZhongDanViewController class]];
     
-    ILSettingItem *mineCollec = [ILSettingArrowItem itemWithIcon:@"icon-wodeshoucheang-40" title:@"我的收藏" destVcClass:[SHBaseViewController class]];
-    ILSettingItem *mineIntegral = [ILSettingArrowItem itemWithIcon:@"icon-wodejifen-40" title:@"我的积分" destVcClass:nil];
+    ILSettingItem *mineCollec = [ILSettingArrowItem itemWithIcon:@"icon-wodeshoucheang-40" title:@"我的收藏" destVcClass:[SHMineCollectViewController class]];
+    ILSettingItem *mineIntegral = [ILSettingArrowItem itemWithIcon:@"icon-wodejifen-40" title:@"我的积分" destVcClass:[SHMinePointsViewController class]];
     mineIntegral.isShowDivider = NO;
     ILSettingGroup *group1 = [[ILSettingGroup alloc] init];
     
@@ -265,12 +283,13 @@
 
 - (void)addGroup2
 {
-    ILSettingItem *singleMonery = [ILSettingArrowItem itemWithIcon:@"icon-doudanluyuejin-40" title:@"投单履约金" destVcClass:nil];
-    ILSettingItem *zhishiCQ = [ILSettingArrowItem  itemWithIcon:@"icon-zhishichangquan-42" title:@"知识产权评估"];
+    ILSettingItem *singleMonery = [ILSettingArrowItem itemWithIcon:@"icon-doudanluyuejin-40" title:@"投单履约金" destVcClass:[SHTouDanMoneyPasswordViewController class]];
+    
+    ILSettingItem *zhishiCQ = [ILSettingArrowItem  itemWithIcon:@"icon-zhishichangquan-42" title:@"知识产权评估" destVcClass:[SHIntellectualViewController class]];
     
     ILSettingItem *myGame = [ILSettingArrowItem itemWithIcon:@"icon-wodediangying-48" title:@"我的游戏电影" destVcClass:nil];
     
-    ILSettingItem *advice = [ILSettingArrowItem itemWithIcon:@"icon-toushuyujianyi-36" title:@"投诉建议" destVcClass:nil];
+    ILSettingItem *advice = [ILSettingArrowItem itemWithIcon:@"icon-toushuyujianyi-36" title:@"投诉建议" destVcClass:[SHAdviceViewController class]];
     
     ILSettingItem *publicGood = [ILSettingArrowItem itemWithIcon:@"icon-gugugongyi-39-35" title:@"汩汩慈善公益" destVcClass:nil];
     publicGood.isShowDivider = NO;
@@ -285,6 +304,13 @@
     
 }
 
+- (void)tap:(UITapGestureRecognizer *)sender
+{
+    SHSettingViewController *setVc = [[SHSettingViewController alloc] init];
+    [self.navigationController pushViewController:setVc animated:YES];
+
+}
+#pragma mark - tableView 代理
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     

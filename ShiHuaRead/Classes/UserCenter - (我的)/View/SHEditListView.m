@@ -8,7 +8,8 @@
 
 #import "SHEditListView.h"
 #import "CommonMenuView.h"
-
+#import "SHPopListView.h"
+#import "LEEAlert.h"
 @interface SHEditListView ()
 
 @property(nonatomic, strong) UILabel *titleLb;
@@ -31,6 +32,7 @@
 - (instancetype)initWithFrame:(CGRect)frame
 {
     if (self = [super initWithFrame:frame]) {
+        _isShowListView = YES;
         [self initView];
     }
     return self;
@@ -56,39 +58,7 @@
     _rightImage = rightView;
     [self addSubview:bgView];
     
-//    _dataArr = @[@"1",@"2",@"3"];
-    
-    NSDictionary *dict1 = @{@"imageName" : @"icon_button_affirm",
-                            @"itemName" : @"撤回"
-                            };
-    NSDictionary *dict2 = @{@"imageName" : @"icon_button_recall",
-                            @"itemName" : @"确认"
-                            };
-    NSDictionary *dict3 = @{@"imageName" : @"icon_button_record",
-                            @"itemName" : @"记录"
-                            };
-    NSArray *dataArray = @[dict1,dict2,dict3];
-    _dataArr = dataArray;
-
     __weak typeof(self) weakSelf = self;
-
-    [CommonMenuView createMenuWithFrame:CGRectMake(0, 0, kScreenWidth - 30, 0) target:nil dataArray:_dataArr itemsClickBlock:^(NSString *str, NSInteger tag) {
-        
-        NSLog(@"%@ - %lu",str,tag);
-        
-        weakSelf.detailLb.text = str;
-        
-        if (_block) {
-            _block(self,str);
-        }
-
-        
-        [CommonMenuView hidden];
-        //        [weakSelf doSomething:(NSString *)str tag:(NSInteger)tag]; // do something
-    } backViewTap:^{
-        //        weakSelf.flag = YES; // 这里的目的是，让rightButton点击，可再次pop出menu
-    }];
-
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]   initWithTarget:self action:@selector(tap:)];
     tap.numberOfTapsRequired = 1;
     [self addGestureRecognizer:tap];
@@ -103,11 +73,64 @@
 
 - (void)tap:(UITapGestureRecognizer *)sender
 {
-    [CommonMenuView updateMenuItemsWith:_dataArr];
-    CGPoint point = CGPointMake(self.centerX, self.bottom + 64);
-    [CommonMenuView showMenuAtPoint:point];
     
+    if (!_isShowListView) {
+        if (_block) {
+            _block(self,nil);
+        }
+        return;
+    }
     
+    __weak typeof(self) weakSelf = self;
+
+    SHPopListView *view = [[SHPopListView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth([[UIScreen mainScreen] bounds]), 200) style:UITableViewStylePlain];
+    
+    view.array = _dataArr;
+    
+    [view registBlock:^(NSString *title) {
+       
+        [LEEAlert closeWithCompletionBlock:^{
+            
+            NSLog(@"选中的%@" ,title);
+            weakSelf.detailLb.text = title;
+            if (_block) {
+                _block(self,title);
+            }
+
+        }];
+        
+    }];
+    
+    [LEEAlert actionsheet].config
+    .LeeTitle(@"请选择")
+    .LeeItemInsets(UIEdgeInsetsMake(0, 0, 20, 0))
+    .LeeAddCustomView(^(LEECustomView *custom) {
+        
+        custom.view = view;
+        
+        custom.isAutoWidth = YES;
+    })
+    .LeeItemInsets(UIEdgeInsetsMake(0, 0, 0, 0))
+    .LeeAddAction(^(LEEAction *action) {
+        
+        action.title = @"取消";
+        
+        action.titleColor = TabbarNorColer;
+        
+        action.backgroundColor = [UIColor whiteColor];
+    })
+    .LeeHeaderInsets(UIEdgeInsetsMake(20, 0, 0, 0))
+    .LeeHeaderColor([UIColor whiteColor])
+    .LeeActionSheetBottomMargin(0.0f) // 设置底部距离屏幕的边距为0
+    .LeeCornerRadius(0.0f) // 设置圆角曲率为0
+    .LeeConfigMaxWidth(^CGFloat(LEEScreenOrientationType type) {
+        
+        // 这是最大宽度为屏幕宽度 (横屏和竖屏)
+        
+        return CGRectGetWidth([[UIScreen mainScreen] bounds]);
+    })
+    .LeeShow();
+
 }
 
 - (void)setDataArr:(NSArray *)dataArr

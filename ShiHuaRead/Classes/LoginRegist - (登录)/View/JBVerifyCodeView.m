@@ -36,7 +36,7 @@
 {
     if (self = [super initWithFrame:frame]) {
         [self initViewWithFrame:frame];
-        self.backgroundColor = white_ffffff;
+//        self.backgroundColor = white_ffffff;
     }
     return self;
 }

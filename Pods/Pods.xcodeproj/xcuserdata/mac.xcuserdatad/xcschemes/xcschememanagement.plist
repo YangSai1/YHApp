@@ -9,7 +9,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>FMDB.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>IQKeyboardManager.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>MJExtension.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -39,6 +49,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>TZImagePickerController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>VTMagic.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -57,22 +72,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>676E6C7FFCD3B84F2CB02CEF219B95FF</key>
+		<key>2D671754D1E1468B74B10687E37E78F5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7FC65417AAE98E29589261E5DA335094</key>
+		<key>39C20E83DD3436FCD46B81D8B4A61E9D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>802799AFE59F25CB3E119AA60CC4FD3F</key>
+		<key>71F2560F3F69DFAD6974AAC3B4678270</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>80354ACD857EAC80208939E1CE3CB170</key>
+		<key>74BA45745B9E169E801291E819B6D1B3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8642CC820CE8C5B88C113D7F47AF4BC3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -92,7 +112,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CA497FE71B17CA1118B5A9C18787E55D</key>
+		<key>A316B54C67E947D23CECD230FA5BFAEF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F7AFD19BBC2C993CDFFD1E04344D3346</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FFF9DBF73C91AF7B18994193EBBFB479</key>
 		<dict>
 			<key>primary</key>
 			<true/>

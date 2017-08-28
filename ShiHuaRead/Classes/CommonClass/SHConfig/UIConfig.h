@@ -27,8 +27,8 @@
 ///////////////////////
 //新的UI机制
 
-#define zBaseWidth 750
-#define zBaseHeight 1230
+#define zBaseWidth 375
+#define zBaseHeight 667
 
 #define zScaleW(valueSize) ((valueSize) * (kScreenWidth/zBaseWidth))
 #define zScaleH(valueSize) ((valueSize) * (kScreenHeight/zBaseHeight))
@@ -103,12 +103,21 @@
 
 #define Color_252525 [EBUtility UIColorFromHexColor:@"252525"]
 
+#define Color_a4a5a4 [EBUtility UIColorFromHexColor:@"a4a5a4"]
+
+
 #define Color_c1c1c1 [EBUtility UIColorFromHexColor:@"c1c1c1"]
 
 #define TabbarNorColer [EBUtility UIColorFromHexColor:@"333333"]
 
 #define LoginTitleColer [EBUtility UIColorFromHexColor:@"818181"]
 
+#define Color_333333 [EBUtility UIColorFromHexColor:@"333333"]
+
+#define Color_666666 [EBUtility UIColorFromHexColor:@"666666"]
+
+// 蓝色按钮
+#define Color_157efb [EBUtility UIColorFromHexColor:@"157efb"]
 
 
 #define TabbarSelectColer RGB(57, 155, 255)
@@ -134,6 +143,7 @@
 
 #define TIP_SHOW @"敬请期待"
 
+#define BASE_URL @"http://114.215.241.137:18088/ysAPP"
 
 #define DLog(fmt, ...) NSLog((@"[文件名:%s]\n" "[函数名:%s]\n" "[行号:%d] \n" fmt), __FILE__, __FUNCTION__, __LINE__, ##__VA_ARGS__);
 #define DeBugLog(fmt, ...) NSLog((@"%s [Line %d] " fmt), __PRETTY_FUNCTION__, __LINE__, ##__VA_ARGS__);

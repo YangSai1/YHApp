@@ -16,7 +16,7 @@
 
 + (void)initialize {
     NSMutableDictionary *attrs = [NSMutableDictionary dictionary];
-    attrs[NSFontAttributeName] = [UIFont systemFontOfSize:16];
+    attrs[NSFontAttributeName] = font_16;
     attrs[NSForegroundColorAttributeName] = NavTitleColoe;
     
     UINavigationBar *appearance = [UINavigationBar appearance];

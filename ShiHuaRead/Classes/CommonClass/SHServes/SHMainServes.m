@@ -19,32 +19,32 @@
 
 - (NSString *)offlineApiBaseUrl
 {
-    return @"http://restapi.amap.com";
+    return @"http://114.215.241.137:18088/ysAPP";
 }
 
 - (NSString *)onlineApiBaseUrl
 {
-    return @"http://restapi.amap.com";
+    return @"http://114.215.241.137:18088/ysAPP";
 }
 
 - (NSString *)offlineApiVersion
 {
-    return @"v3";
+    return @"";
 }
 
 - (NSString *)onlineApiVersion
 {
-    return @"v3";
+    return @"";
 }
 
 - (NSString *)onlinePublicKey
 {
-    return @"384ecc4559ffc3b9ed1f81076c5f8424";
+    return @"";
 }
 
 - (NSString *)offlinePublicKey
 {
-    return @"384ecc4559ffc3b9ed1f81076c5f8424";
+    return @"";
 }
 
 - (NSString *)onlinePrivateKey
@@ -59,14 +59,14 @@
 
 //为某些Service需要拼凑额外字段到URL处
 - (NSDictionary *)extraParmas {
-    return @{@"key": @"374910422"};
-    //    return nil;
+//    return @{@"key": @"374910422"};
+        return nil;
 }
 
 //为某些Service需要拼凑额外的HTTPToken，如accessToken
-- (NSDictionary *)extraHttpHeadParmasWithMethodName:(NSString *)method {
-    return @{@"sessionID": [[NSUUID UUID]UUIDString]};
-}
+//- (NSDictionary *)extraHttpHeadParmasWithMethodName:(NSString *)method {
+//    return @{@"sessionID": [[NSUUID UUID]UUIDString]};
+//}
 
 //- (NSString *)urlGeneratingRuleByMethodName:(NSString *)methodName {
 //    return [NSString stringWithFormat:@"%@/%@/%@", self.apiBaseUrl, self.apiVersion, methodName];

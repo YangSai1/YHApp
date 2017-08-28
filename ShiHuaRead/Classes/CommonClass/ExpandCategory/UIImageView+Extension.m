@@ -14,7 +14,7 @@
 
 - (void)setHeaderWithURL:(NSURL *)url {
     
-    UIImage *placeholder = [[UIImage imageNamed:@"defaultUserHeader"] circleImage];
+    UIImage *placeholder = [UIImage imageNamed:@"icon-60@2x"];
     
     [self sd_setImageWithURL:url
             placeholderImage:placeholder
@@ -22,7 +22,7 @@
                                NSError *error,
                                SDImageCacheType cacheType,
                                NSURL *imageURL) {
-        self.image = image ? [image circleImage] : placeholder;
+        self.image = image ? image : placeholder;
     }];
     
 }

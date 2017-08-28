@@ -29,15 +29,12 @@
     
     self.navigationController.navigationBar.hidden = NO;
     
-    UIBarButtonItem *rightBarItem = [UIBarButtonItem barButtonRightItemWithImageName:@"icon-shaixuan-38-37" target:self action:@selector(rightBtn)];
+    UIBarButtonItem *rightBarItem = [UIBarButtonItem barButtonRightItemWithImageName:@"新增-(1)" target:self action:@selector(rightBtn)];
     self.navigationItem.rightBarButtonItem = rightBarItem;
     
     _menus = [NSMutableArray arrayWithCapacity:0];
     
-    self.magicView.navigationHeight = 30;
-
-//    self.magicView.headerView.backgroundColor = RGBCOLOR(243, 40, 47);
-    //    self.magicView.headerView.backgroundColor = RGBCOLOR(243, 40, 47);
+    self.magicView.navigationHeight = zScaleH(30);
     
     self.magicView.layoutStyle = VTLayoutStyleDivide;
     self.magicView.navigationColor = [UIColor whiteColor];
@@ -129,7 +126,7 @@
     
     NSLog(@"%lu - %lu",pageIndex,_menus.count);
     
-    static NSString *gridId = @"grid.identifier";
+    static NSString *gridId = @"mineGonggao.identifier";
     SHMineNoticeSubViewController *viewController = [magicView dequeueReusablePageWithIdentifier:gridId];
     if (!viewController) {
         viewController = [[SHMineNoticeSubViewController alloc] init];
